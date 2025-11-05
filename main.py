@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from config import setup_logging
 from database.mongodb import MongoDBConnection
-from routers import health, database
+from routers import health, database, transaction
 
 # Setup logging
 logger = setup_logging()
@@ -44,6 +44,7 @@ app = FastAPI(
 # Register routers
 app.include_router(health.router, prefix="/health", tags=["health"])
 app.include_router(database.router, prefix="/db", tags=["database"])
+app.include_router(transaction.router, prefix="/transactions", tags=["transactions"])
 
 
 @app.get("/")

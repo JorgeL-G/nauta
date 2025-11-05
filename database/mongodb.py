@@ -1,4 +1,5 @@
 import logging
+from fastapi import Request, HTTPException
 from motor.motor_asyncio import AsyncIOMotorClient
 from config import settings
 
@@ -16,7 +17,7 @@ class MongoDBConnection:
     async def connect(self):
         """Establishes connection to MongoDB"""
         try:
-            logger.info(f"Connecting to MongoDB at: {settings.mongodb_uri}")
+            logger.info(f"Connecting to MongoDB")
             self.client = AsyncIOMotorClient(settings.mongodb_uri)
             
             # Verify the connection
@@ -24,7 +25,7 @@ class MongoDBConnection:
             
             self.db = self.client[settings.mongodb_db_name]
             self.is_connected = True
-            logger.info(f"Successfully connected to MongoDB. Database: {settings.mongodb_db_name}")
+            logger.info(f"Successfully connected to MongoDB. Database")
         except Exception as e:
             logger.error(f"Error connecting to MongoDB: {e}")
             self.is_connected = False

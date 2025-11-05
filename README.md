@@ -54,9 +54,21 @@ Once the application is running, you can access:
 
 ## Endpoints
 
+### General
 - `GET /` - Welcome message
 - `GET /health` - API status check
 - `GET /db/status` - MongoDB connection status
+
+### Transactions
+- `POST /transactions/` - Create a new transaction
+- `GET /transactions/` - List all transactions with pagination
+  - Query parameters: `page` (default: 1), `limit` (default: 20)
+- `GET /transactions/search` - Search transactions with filters
+  - Query parameters: `category`, `minAmount`, `page`, `limit`
+- `GET /transactions/stats` - Get transaction statistics
+  - Query parameters: `currencies` (list), `categories` (list)
+- `GET /transactions/export` - Export all transactions to CSV files in a ZIP archive
+  - Returns a ZIP file containing one or more CSV files (max 1,000,000 rows per CSV)
 
 ## Project Structure
 
@@ -66,9 +78,15 @@ nauta/
 ├── config.py               # Configuration using Pydantic Settings
 ├── database/
 │   └── mongodb.py          # MongoDB connection class
+├── models/
+│   ├── transaction.py      # Transaction models and schemas
+│   └── enums.py            # Enum definitions (Currency, etc.)
 ├── routers/
 │   ├── health.py           # Health check endpoints
-│   └── database.py         # Database status endpoints
+│   ├── database.py         # Database status endpoints
+│   └── transaction.py      # Transaction endpoints
+├── services/
+│   └── csv_export.py       # CSV export service for transactions
 ├── requirements.txt        # Python dependencies
 └── .env                    # Environment variables (optional)
 ```
@@ -81,3 +99,10 @@ nauta/
 - Logging configuration
 - Environment-based configuration using Pydantic Settings
 - RESTful API with automatic documentation
+- Transaction management (CRUD operations)
+- Transaction search and filtering
+- Transaction statistics and analytics
+- CSV export functionality with automatic splitting for large datasets
+  - Optimized for large datasets with streaming support
+  - Automatic file splitting when exceeding 1,000,000 rows per CSV
+  - ZIP archive generation for multiple CSV files
