@@ -8,6 +8,9 @@ Backend API developed with FastAPI and MongoDB.
 - Anaconda or Miniconda
 - MongoDB (local or remote instance)
 
+## Curso de Kotlin
+https://platzi.com/r/jorge.leon28700/
+
 ## Environment Setup
 
 ### Step 1: Create and activate the virtual environment with Anaconda
@@ -106,3 +109,5 @@ nauta/
   - Optimized for large datasets with streaming support
   - Automatic file splitting when exceeding 1,000,000 rows per CSV
   - ZIP archive generation for multiple CSV files
+
+
