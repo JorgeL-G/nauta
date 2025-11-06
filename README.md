@@ -28,7 +28,13 @@ pip install -r requirements.txt
 
 ### Step 3: Configure environment variables (optional)
 
-Create a `.env` file in the root directory with the following variables:
+Copy the example environment file and customize it if needed:
+
+```bash
+cp .env.example .env
+```
+
+Or create a `.env` file manually in the root directory with the following variables:
 
 ```env
 MONGODB_URI=mongodb://localhost:27017
